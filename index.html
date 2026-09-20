@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -76,7 +75,7 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 8 rgba(0,0,0,0.03);
             display: none;
         }
         .sections-container.active { display: block; }
@@ -252,7 +251,6 @@
         { id: 2, text: "Be ... with that vase - it belonged to my great-grandmother.", word: "CARE", right: "careful" },
         { id: 3, text: "The hotel room was large and ..., with windows on three sides.", word: "SPACE", right: "spacious" },
         { id: 4, text: "There are ... ways of solving this problem, so let's discuss them all.", word: "VARY", right: "various" },
-        { id: 5, text: "Smoking is extremely ... to your health.", word: "HARM", right: "harmomful" }, // Будет скорректировано ниже на правильное harmful
         { id: 5, text: "Smoking is extremely ... to your health.", word: "HARM", right: "harmful" },
         { id: 6, text: "The instructions were completely ... - nobody could understand a word.", word: "USE", right: "useless" },
         { id: 7, text: "Jane is very ... and hopes to become a company director before she is thirty.", word: "AMBITION", right: "ambitious" },
@@ -265,8 +263,8 @@
         { id: 14, text: "The desert stretched to the horizon in an ... sea of sand.", word: "END", right: "endless" },
         { id: 15, text: "Moving house is one of the most ... experiences in life.", word: "STRESS", right: "stressful" },
         { id: 16, text: "Grass snakes are completely ... and never attack people.", word: "HARM", right: "harmless" },
+        { id: 17, text: "Sarah is a very ... person - she paints, writes poetry and designs clothes.", word: "CREATE", right: "creative" },
 
-{ id: 17, text: "Sarah is a very ... person - she paints, writes poetry and designs clothes.", word: "CREATE", right: "creative" },
 { id: 18, text: "Unfortunately, the disease is still ..., although scientists hope to find a treatment.", word: "CURE", right: "incurable" },
 { id: 19, text: "The little boy stood ..., watching the elephants in amazement.", word: "MOTION", right: "motionless" },
 { id: 20, text: "The fields around the village are green and ... in May.", word: "GRASS", right: "grassy" },
@@ -291,7 +289,6 @@
 { id: 39, text: "His speech was so ... that the audience stood up and applauded.", word: "IMPRESS", right: "impressive" },
 { id: 40, text: "The children spent an ... afternoon at the water park.", word: "ENJOY", right: "enjoyable" },
 { id: 41, text: "Tennis is a highly ... sport, and only a few players reach the top.", word: "COMPETE", right: "competitive" },
-{ id: 42, text: "Your plan sounds ... to me, so let's try it.", word: "reasonable" }, // Фикс структуры
 { id: 42, text: "Your plan sounds ... to me, so let's try it.", word: "REASON", right: "reasonable" },
 { id: 43, text: "The hotel stands on a ... coast where the waves crash against the cliffs.", word: "ROCK", right: "rocky" },
 { id: 44, text: "Emily was ... to find her lost passport in the taxi.", word: "LUCK", right: "lucky" },
@@ -444,3 +441,6 @@ if (percent < 85) msg = "Хороший результат! Попробуйте
 if (percent < 60) msg = "Тема усвоена частично. Рекомендуется повторить правила изменения основ (выпадение гласных, чередование) и пройти тест заново.";
 card.innerHTML = <div class="results-screen"> <h2>Раздел "Прилагательные" завершен!</h2> <p>Ваши показатели:</p> <div class="score-num">${score} / ${currentQuestions.length}</div> <p><strong>${percent}% правильных ответов</strong></p> <p style="margin: 20px 0 30px 0; color: #555; line-height: 1.5;">${msg}</p> <button class="action-btn" onclick="startSection('adjectives')">Пройти раздел заново</button> </div>;
 }
+
+
+
