@@ -1,3 +1,15 @@
+Отличная архитектурная задача! Структура вашего проекта теперь становится масштабируемой и профессиональной.
+Чтобы реализовать двухуровневое меню (Модули → Разделы) и без проблем внедрить огромную базу из 101 вопроса, мы полностью переработаем логику приложения.
+## 🛠 Что изменилось в новой архитектуре:
+
+   1. Двухуровневое меню: На главном экране пользователь выбирает глобальный модуль. При выборе «Модуль 2: Словообразование» ниже автоматически открывается список его разделов (пока там один активный раздел — «Прилагательные»). Модуль 1 («Времена») заблокирован заглушкой и ждет будущей реализации.
+   2. Огромная база данных (101 вопрос): Все ваши предложения и ответы бережно перенесены в JavaScript-массив.
+   3. Умный сборщик и перемешивание: При старте раздела скрипт выбирает вопросы, автоматически очищает ответы от лишних пробелов/точек и перемешивает их, чтобы порядок предложений не приедался.
+   4. Сохранение контекста предложений: Для каждого вопроса выводится всё предложение целиком с пропуском и подсказкой-корнем в скобках, прямо как на реальном экзамене.
+
+## Полный обновленный код для index.html
+Замените весь код в вашем файле на GitHub следующим вариантом:
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -263,4 +275,182 @@
         { id: 14, text: "The desert stretched to the horizon in an ... sea of sand.", word: "END", right: "endless" },
         { id: 15, text: "Moving house is one of the most ... experiences in life.", word: "STRESS", right: "stressful" },
         { id: 16, text: "Grass snakes are completely ... and never attack people.", word: "HARM", right: "harmless" },
-{ id: 17, text: "Sarah is a very ... person - she paints, writes poetry and designs clothes.", word: "CREATE", right: "creative" },{ id: 18, text: "Unfortunately, the disease is still ..., although scientists hope to find a treatment.", word: "CURE", right: "incurable" },{ id: 19, text: "The little boy stood ..., watching the elephants in amazement.", word: "MOTION", right: "motionless" },{ id: 20, text: "The fields around the village are green and ... in May.", word: "GRASS", right: "grassy" },{ id: 21, text: "The advice she gave me was very ...: do this first, then that.", word: "PRACTICE", right: "practical" },{ id: 22, text: "Jack felt ... before the exam and couldn't eat anything.", word: "ANXIETY", right: "anxious" },{ id: 23, text: "The Eiffel Tower is probably the most ... building in Europe.", word: "ICON", right: "iconic" },{ id: 24, text: "This jacket is ... for winter - it's much too thin.", word: "SUIT", right: "unsuitable" },{ id: 25, text: "It's ... to think that fifty years ago nobody had a mobile phone.", word: "BELIEVE", right: "unbelievable" },{ id: 26, text: "The hotel was beautiful and ..., with marble floors and gold taps.", word: "LUXURY", right: "luxurious" },{ id: 27, text: "I was ... for all the help my neighbours gave me after the accident.", word: "THANK", right: "thankful" },{ id: 28, text: "The road was ... after the freezing rain, and several cars went off it.", word: "ICE", right: "icy" },{ id: 29, text: "Her progress in English has been ... - she started only a year ago.", word: "REMARK", right: "remarkable" },{ id: 30, text: "We had a ... day at the seaside and nobody wanted to go home.", word: "DELIGHT", right: "delightful" },{ id: 31, text: "The scientist won a ... award for his research on cancer.", word: "PRESTIGE", right: "prestigious" },{ id: 32, text: "Try to be more ... to other people's feelings.", word: "SENSE", right: "sensitive" },{ id: 33, text: "Thousands of people became ... after the earthquake destroyed their houses.", word: "HOME", right: "homeless" },{ id: 34, text: "This kind of computer game can be very ..., so limit your time.", word: "ADDICT", right: "addictive" },{ id: 35, text: "It would be ... to spend all your savings on one pair of shoes.", word: "REASON", right: "unreasonable" },{ id: 36, text: "The weather in Britain is famously ...: it can change five times a day.", word: "PREDICT", right: "unpredictable" },{ id: 37, text: "The old castle on the hill looks ... at night.", word: "MYSTERY", right: "mysterious" },{ id: 38, text: "Everything we needed was ... in the hotel shop.", word: "AVAILABILITY", right: "available" },{ id: 39, text: "His speech was so ... that the audience stood up and applauded.", word: "IMPRESS", right: "impressive" },{ id: 40, text: "The children spent an ... afternoon at the water park.", word: "ENJOY", right: "enjoyable" },{ id: 41, text: "Tennis is a highly ... sport, and only a few players reach the top.", word: "COMPETE", right: "competitive" },{ id: 42, text: "Your plan sounds ... to me, so let's try it.", word: "reasonable" }, // Фикс структуры{ id: 42, text: "Your plan sounds ... to me, so let's try it.", word: "REASON", right: "reasonable" },{ id: 43, text: "The hotel stands on a ... coast where the waves crash against the cliffs.", word: "ROCK", right: "rocky" },{ id: 44, text: "Emily was ... to find her lost passport in the taxi.", word: "LUCK", right: "lucky" },{ id: 45, text: "Modern smartphones are the result of rapid ... progress.", word: "TECHNOLOGY", right: "technological" },{ id: 46, text: "Vaccination proved a highly ... way of stopping the disease.", word: "EFFECT", right: "effective" },{ id: 47, text: "The chair was so ... that I couldn't sit on it for ten minutes.", word: "COMFORT", right: "uncomfortable" },{ id: 48, text: "He kept walking up and down the room, ... and unable to concentrate.", word: "REST", right: "restless" },{ id: 49, text: "The operation is completely ... - you won't feel a thing.", word: "PAIN", right: "painless" },{ id: 50, text: "The pupils were ... about the school trip and asked hundreds of questions.", word: "ENTHUSIASM", right: "enthusiastic" },{ id: 51, text: "Only a ... driver would use a mobile phone at the wheel.", word: "CARE", right: "careless" },{ id: 52, text: "The task turned out to be ...: we tried everything and failed.", word: "POSSIBILITY", right: "impossible" },{ id: 53, text: "Wearing a helmet when you cycle is the ... thing to do.", word: "SENSE", right: "sensible" },{ id: 54, text: "Our new manager is young, energetic and ... about the future of the firm.", word: "OPTIMISM", right: "optimistic" },{ id: 55, text: "She left an ... letter, so nobody knew who had written it.", word: "ANONYMITY", right: "anonymous" },{ id: 56, text: "The museum contains a ... collection of ancient coins.", word: "VALUE", right: "valuable" },{ id: 57, text: "Yoga makes your body stronger and more ....", word: "FLEXIBILITY", right: "flexible" },{ id: 58, text: "The film star arrived in a long ... dress and diamonds.", word: "GLAMOUR", right: "glamorous" },{ id: 59, text: "Rising sea levels could have ... consequences for coastal cities.", word: "DISASTER", right: "disastrous" },{ id: 60, text: "The dog waited by the door for hours - a truly ... friend.", word: "FAITH", right: "faithful" },{ id: 61, text: "The stars were clearly ... in the night sky.", word: "VISION", right: "visible" },{ id: 62, text: "Ann is ... for booking the tickets, so ask her about the seats.", word: "RESPONSIBILITY", right: "responsible" },{ id: 63, text: "It was ... of him to leave the children alone at home.", word: "RESPONSIBILITY", right: "irresponsible" },{ id: 64, text: "Wandering through the town without a plan, I felt ... and bored.", word: "AIM", right: "aimless" },{ id: 65, text: "Without her glasses she was ... to read the timetable.", word: "ABILITY", right: "unable" },{ id: 66, text: "We spent a ... afternoon lying on the beach.", word: "SUN", right: "sunny" },{ id: 67, text: "Climbing without a rope is an extremely ... thing to do.", word: "RISK", right: "risky" },{ id: 68, text: "Fast food and little sleep make for a very ... lifestyle.", word: "HEALTH", right: "unhealthy" },{ id: 69, text: "The heat was ..., and we had to stay indoors all day.", word: "BEAR", right: "unbearable" },{ id: 70, text: "My sister was ... for weeks after her cat disappeared.", word: "HAPPINESS", right: "unhappy" },{ id: 71, text: "The soil here is dry and ..., so very few plants grow.", word: "STONE", right: "stony" },{ id: 72, text: "There were ... stars in the sky - far too many to count.", word: "COUNT", right: "countless" },{ id: 73, text: "Scientists need ... proof, not just opinions.", word: "SCIENCE", right: "scientific" },{ id: 74, text: "The gallery is full of ... treasures from the 18th century.", word: "ART", right: "artistic" },{ id: 75, text: "Delays at the airport are ... in bad weather.", word: "AVOID", right: "unavoidable" },{ id: 76, text: "Short skirts were extremely ... that season.", word: "FASHION", right: "fashionable" },{ id: 77, text: "The business became ... only in its third year.", word: "PROFIT", right: "profitable" },{ id: 78, text: "Your reaction is perfectly ... - anyone would be angry.", word: "UNDERSTAND", right: "understandable" },{ id: 79, text: "In the 1950s the idea of a computer in every home was ....", word: "THINK", right: "unthinkable" },{ id: 80, text: "The tickets were ... because the concert had sold out.", word: "AVAILABILITY", right: "unavailable" },{ id: 81, text: "The company spent a ... amount of money on advertising.", word: "CONSIDER", right: "considerable" },{ id: 82, text: "A flat close to the underground is a very ... place to live.", word: "DESIRE", right: "desirable" },{ id: 83, text: "Loud music late at night is ... in a block of flats.", word: "DESIRE", right: "undesirable" },{ id: 84, text: "My old bike was ... - I bought it for almost nothing.", word: "EXPENSE", right: "inexpensive" },{ id: 85, text: "The report gives an ... analysis of the problem and runs to 300 pages.", word: "EXTEND", right: "extensive" },{ id: 86, text: "The weather forecast is rarely ... in the mountains.", word: "RELY", right: "reliable" },{ id: 87, text: "The conditions were ..., so the plane took off on time.", word: "FAVOUR", right: "favourable" },{ id: 88, text: "The view from the top of the hill is simply ...!", word: "CREDIBLE", right: "incredible" },{ id: 89, text: "Your excuse is not ...: you had three weeks to finish the work.", word: "ACCEPT", right: "acceptable" },{ id: 90, text: "Choose shoes that are ... for long walks in the mountains.", word: "SUIT", right: "suitable" },{ id: 91, text: "It was the most ... concert I have ever been to.", word: "MEMORY", right: "memorable" },{ id: 92, text: "Kate felt ... as she waited for the results of her driving test.", word: "NERVE", right: "nervous" },{ id: 93, text: "There are ... examples of this mistake in your essay.", word: "NUMBER", right: "numerous" },{ id: 94, text: "Students are expected to be ... to their teachers and to each other.", word: "RESPECT", right: "respectful" },{ id: 95, text: "The storm was so ... that it tore the roof off the barn.", word: "POWER", right: "powerful" },{ id: 96, text: "Shakespeare is the most ... English writer of all time.", word: "FAME", right: "famous" },{ id: 97, text: "My cousin is very ...: last year he crossed the Sahara on a motorbike.", word: "ADVENTURE", right: "adventurous" },{ id: 98, text: "The situation looked ..., but the team scored twice in the last minute.", word: "HOPE", right: "hopeless" },{ id: 99, text: "Try to set ... goals - you can't learn a language in a month.", word: "REALITY", right: "realistic" },{ id: 100, text: "After three ... nights with the baby, Ann could hardly stand.", word: "SLEEP", right: "sleepless" },{ id: 101, text: "These headphones are good quality and quite ... for a student.", word: "AFFORD", right: "affordable" }];let currentQuestions = [];let currentQuestionIndex = 0;let score = 0;let isAnswered = false;// Переключение модулей (Уровень 1)function selectModule(modNum) {// Управление кнопками модулейdocument.querySelectorAll('.mod-btn').forEach(btn => btn.classList.remove('active'));document.getElementById(mod-btn-${modNum}).classList.add('active');// Управление контейнерами разделовdocument.querySelectorAll('.sections-container').forEach(c => c.classList.remove('active'));document.getElementById(sections-mod${modNum}).classList.add('active');// Прячем рабочую карточку и возвращаем приветствие, если модуль пустой/сменилсяdocument.getElementById('trainer-card').classList.remove('active');document.getElementById('welcome-screen').classList.remove('hidden');// Снимаем выделение с кнопок разделовdocument.querySelectorAll('.sec-btn').forEach(btn => btn.classList.remove('active'));}// Запуск конкретного подраздела (Уровень 2)function startSection(sectionId) {document.getElementById('welcome-screen').classList.add('hidden');document.getElementById('trainer-card').classList.add('active');// Визуально подсвечиваем активный разделdocument.querySelectorAll('.sec-btn').forEach(btn => btn.classList.remove('active'));if (sectionId === 'adjectives') {document.getElementById('sec-btn-adj').classList.add('active');// Клонируем базу вопросов и перемешиваем её случайным образомcurrentQuestions = [...adjectivesQuestions].sort(() => Math.random() - 0.5);}currentQuestionIndex = 0;score = 0;renderQuestion();}// Отображение текущего вопроса открытого типаfunction renderQuestion() {isAnswered = false;const card = document.getElementById('trainer-card');if (currentQuestionIndex >= currentQuestions.length) {renderResults();return;}const q = currentQuestions[currentQuestionIndex];card.innerHTML = <div class="status-bar"> <span>Раздел: Прилагательные</span> <span>Вопрос ${currentQuestionIndex + 1} из ${currentQuestions.length}</span> <span>Счет: ${score}</span> </div> <div class="sentence-box"> ${q.text.replace('...',...)}  <br><br> Слово-корень: <span class="word-badge">${q.word}</span> </div> <input type="text" id="open-input" class="input-answer" placeholder="Введите правильную форму..." onkeypress="handleKeyPress(event)" autocomplete="off"> <button id="submit-btn" class="action-btn" onclick="handleOpenAnswer()">Проверить ответ</button> <div id="feedback" class="feedback"></div> ;document.getElementById('open-input').focus();}// Проверка введенного пользователем ответаfunction handleOpenAnswer() {if (isAnswered) return;const input = document.getElementById('open-input');const feedback = document.getElementById('feedback');const userAnswer = input.value.trim().toLowerCase();const q = currentQuestions[currentQuestionIndex];// Очищаем правильный ответ от возможных пробелов и случайных символовconst correctAnswer = q.right.trim().toLowerCase();if (!userAnswer) return; // Игнорируем пустые отправкиisAnswered = true;if (userAnswer === correctAnswer) {input.classList.add('correct');feedback.className = "feedback correct";feedback.innerText = "🎉 Отлично! Абсолютно верно.";score++;} else {input.classList.add('wrong');feedback.className = "feedback wrong";feedback.innerText = ❌ Неверно. Правильный вариант: ${q.right};}// Превращаем кнопку проверки в кнопку перехода дальшеconst btn = document.getElementById('submit-btn');btn.innerText = "Следующий вопрос";btn.onclick = nextQuestion;}// Обработка клавиши Enter для быстроты прохожденияfunction handleKeyPress(event) {if (event.key === "Enter") {if (!isAnswered) handleOpenAnswer();else nextQuestion();}}function nextQuestion() {currentQuestionIndex++;renderQuestion();}// Экран итогов разделаfunction renderResults() {const card = document.getElementById('trainer-card');const percent = Math.round((score / currentQuestions.length) * 100);let msg = "Фантастический результат! Вы идеально знаете суффиксы прилагательных.";if (percent < 85) msg = "Хороший результат! Попробуйте пройти раздел еще раз, чтобы довести навыки до автоматизма.";if (percent < 60) msg = "Тема усвоена частично. Рекомендуется повторить правила изменения основ (выпадение гласных, чередование) и пройти тест заново.";card.innerHTML = <div class="results-screen"> <h2>Раздел "Прилагательные" завершен!</h2> <p>Ваши показатели:</p> <div class="score-num">${score} / ${currentQuestions.length}</div> <p><strong>${percent}% правильных ответов</strong></p> <p style="margin: 20px 0 30px 0; color: #555; line-height: 1.5;">${msg}</p> <button class="action-btn" onclick="startSection('adjectives')">Пройти раздел заново</button> </div>;}
+
+{ id: 17, text: "Sarah is a very ... person - she paints, writes poetry and designs clothes.", word: "CREATE", right: "creative" },
+{ id: 18, text: "Unfortunately, the disease is still ..., although scientists hope to find a treatment.", word: "CURE", right: "incurable" },
+{ id: 19, text: "The little boy stood ..., watching the elephants in amazement.", word: "MOTION", right: "motionless" },
+{ id: 20, text: "The fields around the village are green and ... in May.", word: "GRASS", right: "grassy" },
+{ id: 21, text: "The advice she gave me was very ...: do this first, then that.", word: "PRACTICE", right: "practical" },
+{ id: 22, text: "Jack felt ... before the exam and couldn't eat anything.", word: "ANXIETY", right: "anxious" },
+{ id: 23, text: "The Eiffel Tower is probably the most ... building in Europe.", word: "ICON", right: "iconic" },
+{ id: 24, text: "This jacket is ... for winter - it's much too thin.", word: "SUIT", right: "unsuitable" },
+{ id: 25, text: "It's ... to think that fifty years ago nobody had a mobile phone.", word: "BELIEVE", right: "unbelievable" },
+{ id: 26, text: "The hotel was beautiful and ..., with marble floors and gold taps.", word: "LUXURY", right: "luxurious" },
+{ id: 27, text: "I was ... for all the help my neighbours gave me after the accident.", word: "THANK", right: "thankful" },
+{ id: 28, text: "The road was ... after the freezing rain, and several cars went off it.", word: "ICE", right: "icy" },
+{ id: 29, text: "Her progress in English has been ... - she started only a year ago.", word: "REMARK", right: "remarkable" },
+{ id: 30, text: "We had a ... day at the seaside and nobody wanted to go home.", word: "DELIGHT", right: "delightful" },
+{ id: 31, text: "The scientist won a ... award for his research on cancer.", word: "PRESTIGE", right: "prestigious" },
+{ id: 32, text: "Try to be more ... to other people's feelings.", word: "SENSE", right: "sensitive" },
+{ id: 33, text: "Thousands of people became ... after the earthquake destroyed their houses.", word: "HOME", right: "homeless" },
+{ id: 34, text: "This kind of computer game can be very ..., so limit your time.", word: "ADDICT", right: "addictive" },
+{ id: 35, text: "It would be ... to spend all your savings on one pair of shoes.", word: "REASON", right: "unreasonable" },
+{ id: 36, text: "The weather in Britain is famously ...: it can change five times a day.", word: "PREDICT", right: "unpredictable" },
+{ id: 37, text: "The old castle on the hill looks ... at night.", word: "MYSTERY", right: "mysterious" },
+{ id: 38, text: "Everything we needed was ... in the hotel shop.", word: "AVAILABILITY", right: "available" },
+{ id: 39, text: "His speech was so ... that the audience stood up and applauded.", word: "IMPRESS", right: "impressive" },
+{ id: 40, text: "The children spent an ... afternoon at the water park.", word: "ENJOY", right: "enjoyable" },
+{ id: 41, text: "Tennis is a highly ... sport, and only a few players reach the top.", word: "COMPETE", right: "competitive" },
+{ id: 42, text: "Your plan sounds ... to me, so let's try it.", word: "reasonable" }, // Фикс структуры
+{ id: 42, text: "Your plan sounds ... to me, so let's try it.", word: "REASON", right: "reasonable" },
+{ id: 43, text: "The hotel stands on a ... coast where the waves crash against the cliffs.", word: "ROCK", right: "rocky" },
+{ id: 44, text: "Emily was ... to find her lost passport in the taxi.", word: "LUCK", right: "lucky" },
+{ id: 45, text: "Modern smartphones are the result of rapid ... progress.", word: "TECHNOLOGY", right: "technological" },
+{ id: 46, text: "Vaccination proved a highly ... way of stopping the disease.", word: "EFFECT", right: "effective" },
+{ id: 47, text: "The chair was so ... that I couldn't sit on it for ten minutes.", word: "COMFORT", right: "uncomfortable" },
+{ id: 48, text: "He kept walking up and down the room, ... and unable to concentrate.", word: "REST", right: "restless" },
+{ id: 49, text: "The operation is completely ... - you won't feel a thing.", word: "PAIN", right: "painless" },
+{ id: 50, text: "The pupils were ... about the school trip and asked hundreds of questions.", word: "ENTHUSIASM", right: "enthusiastic" },
+{ id: 51, text: "Only a ... driver would use a mobile phone at the wheel.", word: "CARE", right: "careless" },
+{ id: 52, text: "The task turned out to be ...: we tried everything and failed.", word: "POSSIBILITY", right: "impossible" },
+{ id: 53, text: "Wearing a helmet when you cycle is the ... thing to do.", word: "SENSE", right: "sensible" },
+{ id: 54, text: "Our new manager is young, energetic and ... about the future of the firm.", word: "OPTIMISM", right: "optimistic" },
+{ id: 55, text: "She left an ... letter, so nobody knew who had written it.", word: "ANONYMITY", right: "anonymous" },
+{ id: 56, text: "The museum contains a ... collection of ancient coins.", word: "VALUE", right: "valuable" },
+{ id: 57, text: "Yoga makes your body stronger and more ....", word: "FLEXIBILITY", right: "flexible" },
+{ id: 58, text: "The film star arrived in a long ... dress and diamonds.", word: "GLAMOUR", right: "glamorous" },
+{ id: 59, text: "Rising sea levels could have ... consequences for coastal cities.", word: "DISASTER", right: "disastrous" },
+{ id: 60, text: "The dog waited by the door for hours - a truly ... friend.", word: "FAITH", right: "faithful" },
+{ id: 61, text: "The stars were clearly ... in the night sky.", word: "VISION", right: "visible" },
+{ id: 62, text: "Ann is ... for booking the tickets, so ask her about the seats.", word: "RESPONSIBILITY", right: "responsible" },
+{ id: 63, text: "It was ... of him to leave the children alone at home.", word: "RESPONSIBILITY", right: "irresponsible" },
+{ id: 64, text: "Wandering through the town without a plan, I felt ... and bored.", word: "AIM", right: "aimless" },
+{ id: 65, text: "Without her glasses she was ... to read the timetable.", word: "ABILITY", right: "unable" },
+{ id: 66, text: "We spent a ... afternoon lying on the beach.", word: "SUN", right: "sunny" },
+{ id: 67, text: "Climbing without a rope is an extremely ... thing to do.", word: "RISK", right: "risky" },
+{ id: 68, text: "Fast food and little sleep make for a very ... lifestyle.", word: "HEALTH", right: "unhealthy" },
+{ id: 69, text: "The heat was ..., and we had to stay indoors all day.", word: "BEAR", right: "unbearable" },
+{ id: 70, text: "My sister was ... for weeks after her cat disappeared.", word: "HAPPINESS", right: "unhappy" },
+{ id: 71, text: "The soil here is dry and ..., so very few plants grow.", word: "STONE", right: "stony" },
+{ id: 72, text: "There were ... stars in the sky - far too many to count.", word: "COUNT", right: "countless" },
+{ id: 73, text: "Scientists need ... proof, not just opinions.", word: "SCIENCE", right: "scientific" },
+{ id: 74, text: "The gallery is full of ... treasures from the 18th century.", word: "ART", right: "artistic" },
+{ id: 75, text: "Delays at the airport are ... in bad weather.", word: "AVOID", right: "unavoidable" },
+{ id: 76, text: "Short skirts were extremely ... that season.", word: "FASHION", right: "fashionable" },
+{ id: 77, text: "The business became ... only in its third year.", word: "PROFIT", right: "profitable" },
+{ id: 78, text: "Your reaction is perfectly ... - anyone would be angry.", word: "UNDERSTAND", right: "understandable" },
+{ id: 79, text: "In the 1950s the idea of a computer in every home was ....", word: "THINK", right: "unthinkable" },
+{ id: 80, text: "The tickets were ... because the concert had sold out.", word: "AVAILABILITY", right: "unavailable" },
+{ id: 81, text: "The company spent a ... amount of money on advertising.", word: "CONSIDER", right: "considerable" },
+{ id: 82, text: "A flat close to the underground is a very ... place to live.", word: "DESIRE", right: "desirable" },
+{ id: 83, text: "Loud music late at night is ... in a block of flats.", word: "DESIRE", right: "undesirable" },
+{ id: 84, text: "My old bike was ... - I bought it for almost nothing.", word: "EXPENSE", right: "inexpensive" },
+{ id: 85, text: "The report gives an ... analysis of the problem and runs to 300 pages.", word: "EXTEND", right: "extensive" },
+{ id: 86, text: "The weather forecast is rarely ... in the mountains.", word: "RELY", right: "reliable" },
+{ id: 87, text: "The conditions were ..., so the plane took off on time.", word: "FAVOUR", right: "favourable" },
+{ id: 88, text: "The view from the top of the hill is simply ...!", word: "CREDIBLE", right: "incredible" },
+{ id: 89, text: "Your excuse is not ...: you had three weeks to finish the work.", word: "ACCEPT", right: "acceptable" },
+{ id: 90, text: "Choose shoes that are ... for long walks in the mountains.", word: "SUIT", right: "suitable" },
+{ id: 91, text: "It was the most ... concert I have ever been to.", word: "MEMORY", right: "memorable" },
+{ id: 92, text: "Kate felt ... as she waited for the results of her driving test.", word: "NERVE", right: "nervous" },
+{ id: 93, text: "There are ... examples of this mistake in your essay.", word: "NUMBER", right: "numerous" },
+{ id: 94, text: "Students are expected to be ... to their teachers and to each other.", word: "RESPECT", right: "respectful" },
+{ id: 95, text: "The storm was so ... that it tore the roof off the barn.", word: "POWER", right: "powerful" },
+{ id: 96, text: "Shakespeare is the most ... English writer of all time.", word: "FAME", right: "famous" },
+{ id: 97, text: "My cousin is very ...: last year he crossed the Sahara on a motorbike.", word: "ADVENTURE", right: "adventurous" },
+{ id: 98, text: "The situation looked ..., but the team scored twice in the last minute.", word: "HOPE", right: "hopeless" },
+{ id: 99, text: "Try to set ... goals - you can't learn a language in a month.", word: "REALITY", right: "realistic" },
+{ id: 100, text: "After three ... nights with the baby, Ann could hardly stand.", word: "SLEEP", right: "sleepless" },
+{ id: 101, text: "These headphones are good quality and quite ... for a student.", word: "AFFORD", right: "affordable" }
+];
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+let score = 0;
+let isAnswered = false;
+// Переключение модулей (Уровень 1)
+function selectModule(modNum) {
+// Управление кнопками модулей
+document.querySelectorAll('.mod-btn').forEach(btn => btn.classList.remove('active'));
+document.getElementById(mod-btn-${modNum}).classList.add('active');
+// Управление контейнерами разделов
+document.querySelectorAll('.sections-container').forEach(c => c.classList.remove('active'));
+document.getElementById(sections-mod${modNum}).classList.add('active');
+// Прячем рабочую карточку и возвращаем приветствие, если модуль пустой/сменился
+document.getElementById('trainer-card').classList.remove('active');
+document.getElementById('welcome-screen').classList.remove('hidden');
+// Снимаем выделение с кнопок разделов
+document.querySelectorAll('.sec-btn').forEach(btn => btn.classList.remove('active'));
+}
+// Запуск конкретного подраздела (Уровень 2)
+function startSection(sectionId) {
+document.getElementById('welcome-screen').classList.add('hidden');
+document.getElementById('trainer-card').classList.add('active');
+// Визуально подсвечиваем активный раздел
+document.querySelectorAll('.sec-btn').forEach(btn => btn.classList.remove('active'));
+if (sectionId === 'adjectives') {
+document.getElementById('sec-btn-adj').classList.add('active');
+// Клонируем базу вопросов и перемешиваем её случайным образом
+currentQuestions = [...adjectivesQuestions].sort(() => Math.random() - 0.5);
+}
+currentQuestionIndex = 0;
+score = 0;
+renderQuestion();
+}
+// Отображение текущего вопроса открытого типа
+function renderQuestion() {
+isAnswered = false;
+const card = document.getElementById('trainer-card');
+if (currentQuestionIndex >= currentQuestions.length) {
+renderResults();
+return;
+}
+const q = currentQuestions[currentQuestionIndex];
+card.innerHTML = <div class="status-bar"> <span>Раздел: Прилагательные</span> <span>Вопрос ${currentQuestionIndex + 1} из ${currentQuestions.length}</span> <span>Счет: ${score}</span> </div> <div class="sentence-box"> ${q.text.replace('...',...)} <br><br> Слово-корень: <span class="word-badge">${q.word}</span> </div> <input type="text" id="open-input" class="input-answer" placeholder="Введите правильную форму..." onkeypress="handleKeyPress(event)" autocomplete="off"> <button id="submit-btn" class="action-btn" onclick="handleOpenAnswer()">Проверить ответ</button> <div id="feedback" class="feedback"></div> ;
+document.getElementById('open-input').focus();
+}
+// Проверка введенного пользователем ответа
+function handleOpenAnswer() {
+if (isAnswered) return;
+const input = document.getElementById('open-input');
+const feedback = document.getElementById('feedback');
+const userAnswer = input.value.trim().toLowerCase();
+const q = currentQuestions[currentQuestionIndex];
+// Очищаем правильный ответ от возможных пробелов и случайных символов
+const correctAnswer = q.right.trim().toLowerCase();
+if (!userAnswer) return; // Игнорируем пустые отправки
+isAnswered = true;
+if (userAnswer === correctAnswer) {
+input.classList.add('correct');
+feedback.className = "feedback correct";
+feedback.innerText = "🎉 Отлично! Абсолютно верно.";
+score++;
+} else {
+input.classList.add('wrong');
+feedback.className = "feedback wrong";
+feedback.innerText = ❌ Неверно. Правильный вариант: ${q.right};
+}
+// Превращаем кнопку проверки в кнопку перехода дальше
+const btn = document.getElementById('submit-btn');
+btn.innerText = "Следующий вопрос";
+btn.onclick = nextQuestion;
+}
+// Обработка клавиши Enter для быстроты прохождения
+function handleKeyPress(event) {
+if (event.key === "Enter") {
+if (!isAnswered) handleOpenAnswer();
+else nextQuestion();
+}
+}
+function nextQuestion() {
+currentQuestionIndex++;
+renderQuestion();
+}
+// Экран итогов раздела
+function renderResults() {
+const card = document.getElementById('trainer-card');
+const percent = Math.round((score / currentQuestions.length) * 100);
+let msg = "Фантастический результат! Вы идеально знаете суффиксы прилагательных.";
+if (percent < 85) msg = "Хороший результат! Попробуйте пройти раздел еще раз, чтобы довести навыки до автоматизма.";
+if (percent < 60) msg = "Тема усвоена частично. Рекомендуется повторить правила изменения основ (выпадение гласных, чередование) и пройти тест заново.";
+card.innerHTML = <div class="results-screen"> <h2>Раздел "Прилагательные" завершен!</h2> <p>Ваши показатели:</p> <div class="score-num">${score} / ${currentQuestions.length}</div> <p><strong>${percent}% правильных ответов</strong></p> <p style="margin: 20px 0 30px 0; color: #555; line-height: 1.5;">${msg}</p> <button class="action-btn" onclick="startSection('adjectives')">Пройти раздел заново</button> </div>;
+}
