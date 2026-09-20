@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Formation Trainer</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --primary-hover: #357abd;
+            --bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --success: #2ecc71;
+            --error: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary); }
+
+        /* Навигация по модулям */
+        .modules-nav {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active, .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Карточки с заданиями */
+        .module-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: none;
+        }
+
+        .module-card.active {
+            display: block;
+        }
+
+        .question-box {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid var(--primary);
+            background: #f9fbfd;
+        }
+
+        /* Стили для вариантов ответов */
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            background: #f0f4f8;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-item:hover { background: #e1e9f0; }
+        .option-item.correct { background: var(--success); color: white; }
+        .option-item.wrong { background: var(--error); color: white; }
+
+        /* Стили для открытых вопросов */
+        .input-answer {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .input-answer.correct { border-color: var(--success); background: #eafaf1; }
+        .input-answer.wrong { border-color: var(--error); background: #fdedec; }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover { background: var(--primary-hover); }
+        
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .feedback.correct { color: var(--success); }
+        .feedback.wrong { color: var(--error); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Тренажер Словообразования</h1>
+        <p>Изучение суффиксов положительных прилагательных в английском языке</p>
+    </header>
+
+    <!-- Панель переключения модулей -->
+    <div class="modules-nav">
+        <button class="nav-btn active" onclick="switchModule('module1')">Модуль 1: Выбор ответа</button>
+        <button class="nav-btn" onclick="switchModule('module2')">Модуль 2: Открытый ввод</button>
+    </div>
+
+    <!-- МОДУЛЬ 1: Выбор вариантов ответа -->
+    <div id="module1" class="module-card active">
+        <h2>Тест: Выберите правильный суффикс</h2>
+        <div class="question-box">
+            <p id="q1-text">Задание: Образуйте прилагательное от слова <strong>FAME</strong> (Слава).</p>
+            <ul class="options-list" id="q1-options">
+                <li class="option-item" onclick="checkQuiz(this, false, 'Увы, немая -e должна выпасть!')">fameous</li>
+                <li class="option-item" onclick="checkQuiz(this, true, 'Отлично! Немая -e выпала перед суффиксом -ous.')">famous</li>
+                <li class="option-item" onclick="checkQuiz(this, false, 'Суффикс -ful здесь не используется.')">fameful</li>
+            </ul>
+            <div id="q1-feedback" class="feedback"></div>
+        </div>
+    </div>
+
+    <!-- МОДУЛЬ 2: Открытые вопросы -->
+    <div id="module2" class="module-card">
+        <h2>Практика: Введите слово целиком</h2>
+        <div class="question-box">
+            <p>Образуйте прилагательное от слова <strong>COURAGE</strong> (Мужество). <br><small>Подсказка: Помните про исключение сохранения -e после g!</small></p>
+            <input type="text" id="q2-input" class="input-answer" placeholder="Введите ваш ответ на английском...">
+            <button class="btn" onclick="checkOpenAnswer()">Проверить ответ</button>
+            <div id="q2-feedback" class="feedback"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Логика переключения вкладок/модулей
+    function switchModule(moduleId) {
+        // Скрываем все модули
+        document.querySelectorAll('.module-card').forEach(card => card.classList.remove('active'));
+        // Убираем активный класс у кнопок
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Показываем нужный модуль
+        document.getElementById(moduleId).classList.add('active');
+        // Делаем нажатую кнопку активной
+        event.target.classList.add('active');
+    }
+
+    // Логика проверки теста (Модуль 1)
+    function checkQuiz(element, isCorrect, feedbackText) {
+        const parent = element.parentElement;
+        // Запрещаем повторный клик
+        if(parent.classList.contains('answered')) return;
+        parent.classList.add('answered');
+
+        const feedbackDiv = document.getElementById('q1-feedback');
+        feedbackDiv.innerText = feedbackText;
+
+        if(isCorrect) {
+            element.classList.add('correct');
+            feedbackDiv.className = "feedback correct";
+        } else {
+            element.classList.add('wrong');
+            feedbackDiv.className = "feedback wrong";
+            // Подсвечиваем правильный тоже
+            Array.from(parent.children).forEach(li => {
+                if(li.innerText === 'famous') li.classList.add('correct');
+            });
+        }
+    }
+
+    // Логика проверки ввода (Модуль 2)
+    function checkOpenAnswer() {
+        const input = document.getElementById('q2-input');
+        const feedbackDiv = document.getElementById('q2-feedback');
+        const userAnswer = input.value.trim().toLowerCase();
+        const correctAnswer = "courageous";
+
+        if(userAnswer === correctAnswer) {
+            input.className = "input-answer correct";
+            feedbackDiv.innerText = "Абсолютно верно! Буква 'e' сохраняется после 'g', чтобы звук оставался мягким.";
+            feedbackDiv.className = "feedback correct";
+        } else {
+            input.className = "input-answer wrong";
+            feedbackDiv.innerText = `Неправильно. Правильный ответ: ${correctAnswer}. Попробуйте еще раз!`;
+            feedbackDiv.className = "feedback wrong";
+        }
+    }
+</script>
+
+</body>
+</html>
